@@ -1,0 +1,13 @@
+git status
+git add/rm
+git commit -m "test commit"
+git log -graph
+git diff -color-words
+git reset:
+ . HEAD~1
+ 
+git remote add origin adres_do repo - dodawanie
+
+git fetch - pobiera dane z serwera
+git push -u origin master - pozniej
+git push
