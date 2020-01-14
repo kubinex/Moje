@@ -15,7 +15,7 @@ Ma koniec dzia³ania program tworzy raport w pliku tekstowym*/
 int main(int argc, char* argv[])
 {
 	{
-		ProgramService program;
+		ProgramService program, p2;
 
 		try
 		{
@@ -27,9 +27,11 @@ int main(int argc, char* argv[])
 
 			program.load_words_from_file_into_program();		
 
-			ProgramService program2 = program;
+			ProgramService program2 = program, p;
 
-			program.write_report();
+			p = program;
+
+			program2.write_report();
 
 			cout << "Program zakonczyl dzialanie i wygenerowal raport. \nProgram napisal Jakub Lagodka " << endl << endl;
 		}

@@ -1,13 +1,6 @@
 #include "ProgramService.h" 
 using namespace std;
 
-ProgramService::ProgramService(const ProgramService& _copy) : time(_copy.time),
-	list_of_arguments(_copy.list_of_arguments), list_of_key_words(_copy.list_of_key_words)
-{
-	if (_copy.structure)
-		copy_structure(_copy.structure);
-}
-
 auto ProgramService::operator=(const ProgramService& _copy) -> ProgramService &
 {
 	if (&_copy != this)
@@ -18,11 +11,14 @@ auto ProgramService::operator=(const ProgramService& _copy) -> ProgramService &
 
 		list_of_key_words = _copy.list_of_key_words;		
 
-		initialize_structure();
-
-		structure->copy_using_assignment_operator(*_copy.structure);
-
 		time = _copy.time;
+
+		if (_copy.get_structure())
+		{
+			initialize_structure();
+
+			structure->copy_using_assignment_operator(*_copy.structure);
+		}
 	}
 
 	return *this;
@@ -78,20 +74,28 @@ auto ProgramService::initialize_structure() -> void
 		structure = new BinaryTreeCString;
 }
 
-auto ProgramService::copy_structure(const DuplicateWordSearch* _copy) -> void
+auto ProgramService::copy_structure(const ProgramService& _copy) -> DuplicateWordSearch*
 {
-	map<string, string>::const_iterator it;
+	if (!_copy.get_list_of_arguments().empty())
+	{
+		map<string, string>::const_iterator it;
 
-	it = list_of_key_words.find(list_of_arguments.at("-a"));
+		it = list_of_key_words.find(list_of_arguments.at("-a"));
 
-	if (it->second == "cointainer")
-		structure = new Cointainer{*_copy};
+		if (it->second == "cointainer")
+			structure = new Cointainer{ *_copy.get_structure() };
 
-	else if (it->second == "binary_tree")
-		structure = new BinaryTree{* _copy };
+		else if (it->second == "binary_tree")
+			structure = new BinaryTree{ *_copy.get_structure() };
+
+		else
+			structure = new BinaryTreeCString{ *_copy.get_structure() };
+
+		return structure;
+	}
 
 	else
-		structure = new BinaryTreeCString{* _copy };
+		return nullptr;
 }
 
 auto ProgramService::load_arguments_and_initialize_structure(int argc, char* argv[]) -> void
@@ -207,11 +211,15 @@ auto ProgramService::load_words_from_file_into_program() -> void
 
 auto ProgramService::write_report() -> void
 {	
-	open_input_and_output_file_if_not_opened();
+	if (!list_of_arguments.empty())
+	{
+		open_input_and_output_file_if_not_opened();
 
-	output << "Raport dotyczacy programu:" << endl << endl
-		<< "Program dzialal w nastepujacym przedziale czasowym:\n"
-		<< time.get_date_time_info_about_difference_beetween_initialization_and_current_time()
-		<< endl << endl << structure->get_structure_info(get_list_of_arguments().at("-i"))
-		<< endl << "Program napisal Jakub Lagodka.";
+		output << "Raport dotyczacy programu:" << endl << endl
+			<< "Program dzialal w nastepujacym przedziale czasowym:\n"
+			<< time.get_date_time_info_about_difference_beetween_initialization_and_current_time()
+			<< endl << endl << structure->get_structure_info(get_list_of_arguments().at("-i"))
+			<< endl << "Program napisal Jakub Lagodka.";
+	}
+	//trzeba zrobic tez raport jesli bylo puste!
 }

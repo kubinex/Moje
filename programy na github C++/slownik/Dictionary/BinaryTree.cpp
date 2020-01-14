@@ -3,17 +3,26 @@ using namespace std;
 
 int BinaryTree::number_of_trees;
 
+BinaryTree::BinaryTree(const BinaryTree& _copy)
+{
+	DuplicateWordSearch::operator=(_copy);
+
+	copy_tree(_copy.root);
+
+	number_of_trees++;
+};
+
 auto BinaryTree::operator=(const BinaryTree& _copy) -> BinaryTree&
 {
 	if (&_copy != this)
 	{
 		remove();
 
-		number_of_trees++;
-
 		DuplicateWordSearch::operator=(_copy);
 
-		root = copy_tree(_copy.root);
+		copy_tree(_copy.root);
+
+		number_of_trees++;
 	}
 
 	return *this;

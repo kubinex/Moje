@@ -38,11 +38,6 @@ public:
 
 	auto get_number_of_different_words() const -> int override { return static_cast<int>(this->words_sorted_alphabetically.size()); };
 
-	auto create_new_structure() const -> DuplicateWordSearch* override { return new Cointainer; };
-
-	/*auto copy_structure(const DuplicateWordSearch& _copy) const -> void override
-	{ Cointainer{ dynamic_cast<const Cointainer&>(_copy) };};*/
-
 	auto copy_using_assignment_operator(const DuplicateWordSearch& _copy) -> DuplicateWordSearch & override 
 	{ return operator=(dynamic_cast<const Cointainer&>(_copy)); };
 

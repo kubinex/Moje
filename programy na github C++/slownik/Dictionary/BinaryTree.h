@@ -8,12 +8,11 @@ class BinaryTree : public DuplicateWordSearch
 public:	
 	BinaryTree() : root{ nullptr } { number_of_trees++; };
 
-	BinaryTree(const BinaryTree& _copy) : root{ copy_tree(_copy.root) }, 
-		DuplicateWordSearch(_copy) {};
+	BinaryTree(const BinaryTree& _copy);
 
 	BinaryTree(const DuplicateWordSearch& _copy) : BinaryTree(dynamic_cast<const BinaryTree&>(_copy)) {};
 
-	~BinaryTree() { remove(); };
+	virtual ~BinaryTree() { remove(); };
 
 	auto operator=(const BinaryTree& _copy) ->BinaryTree &;
 
@@ -32,11 +31,6 @@ public:
 	virtual auto write_all_words_sorted_alphabetically() const -> std::string override;
 
 	virtual auto get_structure_type() const->std::string override;
-
-	virtual auto create_new_structure() const -> DuplicateWordSearch* override { return new BinaryTree; };
-
-	/*virtual auto copy_structure(const DuplicateWordSearch& _copy) const -> void override
-	{ BinaryTree{ dynamic_cast<const BinaryTree&>(_copy) }; };*/
 
 	auto copy_using_assignment_operator(const DuplicateWordSearch& _copy) -> DuplicateWordSearch& override 
 	{ return operator=(dynamic_cast<const BinaryTree&>(_copy));};

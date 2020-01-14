@@ -11,18 +11,13 @@ public:
 
 	BinaryTreeCString(const DuplicateWordSearch& _copy) : BinaryTreeCString(dynamic_cast<const BinaryTreeCString&>(_copy)) {};
 
-	~BinaryTreeCString() { remove(); };
+	~BinaryTreeCString() = default;
 
 	auto operator=(const BinaryTreeCString& _copy)->BinaryTreeCString &;
 
 	auto insert_word(const std::string& word) -> bool override;
 
 	auto get_structure_type() const -> std::string override;
-
-	auto create_new_structure() const -> DuplicateWordSearch* override { return new BinaryTreeCString; };
-
-	/*auto copy_structure(const DuplicateWordSearch& _copy) const -> void override
-	{ BinaryTreeCString{ dynamic_cast<const BinaryTreeCString&>(_copy) }; };*/
 
 	auto copy_using_assignment_operator(const DuplicateWordSearch& _copy) -> DuplicateWordSearch& override 
 	{ return operator=(dynamic_cast<const BinaryTreeCString&>(_copy));};

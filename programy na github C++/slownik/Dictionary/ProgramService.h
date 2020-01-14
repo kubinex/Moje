@@ -18,7 +18,9 @@ public:
 	// Konstruktor bezparametrowy
 	ProgramService() = default;
 
-	ProgramService(const ProgramService&);
+	ProgramService(const ProgramService& _copy) : time(_copy.time), list_of_arguments(_copy.list_of_arguments), 
+		list_of_key_words(_copy.list_of_key_words), structure(copy_structure(_copy)) {};
+
 	//destruktor
 	~ProgramService() { remove(); };
 
@@ -38,14 +40,14 @@ public:
 
 	auto remove() -> void;
 
+	auto get_structure() const -> DuplicateWordSearch* { return structure; };
+
 private:
 	auto initialize_list_of_key_words() -> void;
 
 	auto initialize_structure() -> void;
 
-	auto copy_structure(const DuplicateWordSearch* _copy) -> void;
-
-	DuplicateWordSearch* structure{};
+	auto copy_structure(const ProgramService& _copy) -> DuplicateWordSearch*;
 
 	DateTime time{};
 
@@ -56,6 +58,8 @@ private:
 	std::map<std::string, std::string> list_of_arguments{};
 
 	std::map<std::string, std::string> list_of_key_words{};
+
+	DuplicateWordSearch* structure{};
 
 	/*auto copy_using_operator(const ProgramService& _copy)->void;*/
 };

@@ -28,10 +28,6 @@ public:
 
 	virtual auto get_number_of_different_words() const -> int = 0;
 
-	virtual auto create_new_structure() const -> DuplicateWordSearch* = 0;
-
-	//virtual auto copy_structure(const DuplicateWordSearch& _copy) const -> void = 0;
-
 	virtual auto operator=(const DuplicateWordSearch& _copy) -> DuplicateWordSearch&;
 
 	virtual auto copy_using_assignment_operator(const DuplicateWordSearch&  _copy) -> DuplicateWordSearch & = 0;

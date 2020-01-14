@@ -1,9 +1,9 @@
 Raport dotyczacy programu:
 
 Program dzialal w nastepujacym przedziale czasowym:
-od 14.1.2020 o godzinie 18:5:11:259.
-do 14.1.2020 o godzinie 18:5:12:18.
-Program dzialal przez 0 godzin, 0 minut, 0 sekund, 759 milisekund, 52 mikrosekund.
+od 14.1.2020 o godzinie 19:41:33:948.
+do 14.1.2020 o godzinie 19:41:34:0.
+Program dzialal przez 0 godzin, 0 minut, 0 sekund, 52 milisekund, 898 mikrosekund.
 
 Wybrano drzewo binarne zbudowane z wezlow przechowujacych slowa w zmiennej typu CString (char*)
 jako strukture do przechowywania danych.

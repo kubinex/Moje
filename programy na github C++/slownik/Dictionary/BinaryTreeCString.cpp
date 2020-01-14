@@ -16,7 +16,9 @@ auto BinaryTreeCString::operator=(const BinaryTreeCString& _copy) -> BinaryTreeC
 
 		DuplicateWordSearch::operator=(_copy);
 
-		root = copy_tree(_copy.root);
+		copy_tree(_copy.root);
+
+		number_of_trees++;
 	}
 
 	return *this;
