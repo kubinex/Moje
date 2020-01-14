@@ -9,6 +9,8 @@ auto BinaryTree::operator=(const BinaryTree& _copy) -> BinaryTree&
 	{
 		remove();
 
+		number_of_trees++;
+
 		DuplicateWordSearch::operator=(_copy);
 
 		root = copy_tree(_copy.root);
@@ -24,7 +26,7 @@ auto BinaryTree::remove() -> void
 	number_of_trees--;
 }
 
-auto BinaryTree::delete_structure_recursive(Node* _root) -> void
+auto BinaryTree::delete_structure_recursive(Node*& _root) -> void
 {
 	if (_root)
 	{
@@ -123,14 +125,14 @@ auto BinaryTree::insert_word(const string& word) -> bool
 	return true;
 }
 
-auto BinaryTree::insert_word_to_new_binary_tree(const Node* source_node , Node*& new_root) const -> bool
+auto BinaryTree::insert_word_to_new_binary_tree(const Node* source_node) -> bool
 {
-	if (!new_root)
-		new_root = new Node{ source_node };
+	if (!root)
+		root = new Node{ source_node };
 
 	else
 	{
-		auto tmp = new_root;
+		auto tmp = root;
 
 		while (true)
 		{
@@ -163,30 +165,25 @@ auto BinaryTree::insert_word_to_new_binary_tree(const Node* source_node , Node*&
 	return true;
 }
 
-auto BinaryTree::copy_all_nodes_recursive(const Node *source_root, Node*& _root) const -> void
+auto BinaryTree::copy_all_nodes_recursive(const Node *source_root) -> void
 {
 	if (source_root)
 	{
-		insert_word_to_new_binary_tree(source_root, _root);
+		insert_word_to_new_binary_tree(source_root);
 
-		copy_all_nodes_recursive(source_root->left,_root);
-		copy_all_nodes_recursive(source_root->right,_root);
+		copy_all_nodes_recursive(source_root->left);
+		copy_all_nodes_recursive(source_root->right);
 	}
 }
 
-auto BinaryTree::copy_tree(const Node* source_root) const -> Node*
+auto BinaryTree::copy_tree(const Node* source_root) -> Node*
 {
 	if (!source_root)
 		return nullptr;
 
-	else
-		number_of_trees++;
+	copy_all_nodes_recursive(source_root);
 
-	Node* new_root = nullptr;
-
-	copy_all_nodes_recursive(source_root, new_root);
-
-	return new_root;
+	return root;
 }
 
 auto BinaryTree::write_all_words_sorted_alphabetically() const -> string

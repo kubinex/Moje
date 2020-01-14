@@ -30,11 +30,11 @@ public:
 
 	virtual auto create_new_structure() const -> DuplicateWordSearch* = 0;
 
-	virtual auto copy_structure() const -> DuplicateWordSearch* = 0;
+	//virtual auto copy_structure(const DuplicateWordSearch& _copy) const -> void = 0;
 
 	virtual auto operator=(const DuplicateWordSearch& _copy) -> DuplicateWordSearch&;
 
-	virtual auto copy_using_assignment_operator(const DuplicateWordSearch&  _copy)  -> DuplicateWordSearch & = 0;
+	virtual auto copy_using_assignment_operator(const DuplicateWordSearch&  _copy) -> DuplicateWordSearch & = 0;
 
 	auto change_big_letters_to_lower(std::string& word) -> std::string;
 

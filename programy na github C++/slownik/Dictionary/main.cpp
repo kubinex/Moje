@@ -20,10 +20,14 @@ int main(int argc, char* argv[])
 		try
 		{
 			cout << "Uwaga! Program nie obsluguje polskich (ani zadnych spoza kodowania ASCII) znakow!" << endl << endl;
-
+			//zrobic tak, zeby tutaj uzywac tylko konstruktorow i operatorow!
+			//wyjatek 	catch (ProgramService::UnproperArgumentsException) przeniesc do miejsca, 
+			//gdzie sie tworzy program, zeby tam uzytkownik mogl recznie wprowadzic argumenty poprzez konsole
 			program.load_arguments_and_initialize_structure(argc, argv);
 
 			program.load_words_from_file_into_program();		
+
+			ProgramService program2 = program;
 
 			program.write_report();
 

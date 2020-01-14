@@ -14,6 +14,8 @@ public:
 		words_sorted_by_number_of_occurences{_copy.words_sorted_by_number_of_occurences}, DuplicateWordSearch(_copy) 
 	{number_of_cointainers += 2; };
 
+	Cointainer(const DuplicateWordSearch& _copy) : Cointainer(dynamic_cast<const Cointainer&>(_copy)) {};
+
 	~Cointainer() { remove(); };
 
 	auto operator=(const Cointainer& _copy) -> Cointainer &;
@@ -38,10 +40,11 @@ public:
 
 	auto create_new_structure() const -> DuplicateWordSearch* override { return new Cointainer; };
 
-	auto copy_structure() const -> DuplicateWordSearch* override { return new Cointainer{ *this }; };
+	/*auto copy_structure(const DuplicateWordSearch& _copy) const -> void override
+	{ Cointainer{ dynamic_cast<const Cointainer&>(_copy) };};*/
 
-	auto copy_using_assignment_operator(const DuplicateWordSearch& _copy) -> DuplicateWordSearch &
-		override { return operator=(dynamic_cast<const Cointainer&>(_copy)); };
+	auto copy_using_assignment_operator(const DuplicateWordSearch& _copy) -> DuplicateWordSearch & override 
+	{ return operator=(dynamic_cast<const Cointainer&>(_copy)); };
 
 private:
 

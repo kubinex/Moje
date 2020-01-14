@@ -5,7 +5,7 @@ ProgramService::ProgramService(const ProgramService& _copy) : time(_copy.time),
 	list_of_arguments(_copy.list_of_arguments), list_of_key_words(_copy.list_of_key_words)
 {
 	if (_copy.structure)
-		structure = _copy.structure->copy_structure();
+		copy_structure(_copy.structure);
 }
 
 auto ProgramService::operator=(const ProgramService& _copy) -> ProgramService &
@@ -76,6 +76,22 @@ auto ProgramService::initialize_structure() -> void
 
 	else
 		structure = new BinaryTreeCString;
+}
+
+auto ProgramService::copy_structure(const DuplicateWordSearch* _copy) -> void
+{
+	map<string, string>::const_iterator it;
+
+	it = list_of_key_words.find(list_of_arguments.at("-a"));
+
+	if (it->second == "cointainer")
+		structure = new Cointainer{*_copy};
+
+	else if (it->second == "binary_tree")
+		structure = new BinaryTree{* _copy };
+
+	else
+		structure = new BinaryTreeCString{* _copy };
 }
 
 auto ProgramService::load_arguments_and_initialize_structure(int argc, char* argv[]) -> void

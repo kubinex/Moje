@@ -11,6 +11,8 @@ public:
 	BinaryTree(const BinaryTree& _copy) : root{ copy_tree(_copy.root) }, 
 		DuplicateWordSearch(_copy) {};
 
+	BinaryTree(const DuplicateWordSearch& _copy) : BinaryTree(dynamic_cast<const BinaryTree&>(_copy)) {};
+
 	~BinaryTree() { remove(); };
 
 	auto operator=(const BinaryTree& _copy) ->BinaryTree &;
@@ -21,38 +23,39 @@ public:
 
 	auto remove() -> void override;
 
-	auto write_all_words_sorted_alphabetically() const -> std::string override;
-
-	auto get_structure_type() const -> std::string override;
-
 	auto get_structure_info(const std::string& file) const -> std::string override;
 
 	auto get_number_of_all_words() const -> int override { return this->number_of_all_words; };
 
 	auto get_number_of_different_words() const -> int override { return  (Node::number_of_all_nodes / number_of_trees); };
 
-	auto create_new_structure() const -> DuplicateWordSearch* override { return new BinaryTree; };
+	virtual auto write_all_words_sorted_alphabetically() const -> std::string override;
 
-	auto copy_structure() const -> DuplicateWordSearch* override { return new BinaryTree{ *this }; };
+	virtual auto get_structure_type() const->std::string override;
 
-	auto copy_using_assignment_operator(const DuplicateWordSearch& _copy) -> DuplicateWordSearch&
-		override { return operator=(dynamic_cast<const BinaryTree&>(_copy));};
+	virtual auto create_new_structure() const -> DuplicateWordSearch* override { return new BinaryTree; };
 
-private:
+	/*virtual auto copy_structure(const DuplicateWordSearch& _copy) const -> void override
+	{ BinaryTree{ dynamic_cast<const BinaryTree&>(_copy) }; };*/
+
+	auto copy_using_assignment_operator(const DuplicateWordSearch& _copy) -> DuplicateWordSearch& override 
+	{ return operator=(dynamic_cast<const BinaryTree&>(_copy));};
+
+protected:
 	Node* root;
 
 	static int number_of_trees;
 
-	auto delete_structure_recursive(Node* _root) -> void;
+	virtual auto delete_structure_recursive(Node*& _root) -> void;
 
 	auto find_successor(const Node* node) const -> const Node*;
 
 	auto find_first_node(const Node* _root) const -> const Node*;
 
-	auto copy_tree(const Node* source_root) const -> Node*;
+	virtual auto copy_tree(const Node* source_root) -> Node*;
 
-	auto insert_word_to_new_binary_tree(const Node* source_node, Node*& new_root) const -> bool;
+	virtual auto insert_word_to_new_binary_tree(const Node* source_node) -> bool;
 
-	auto copy_all_nodes_recursive(const Node* source_root, Node*& _root) const -> void;
+	virtual auto copy_all_nodes_recursive(const Node* source_root) -> void;
 };
 

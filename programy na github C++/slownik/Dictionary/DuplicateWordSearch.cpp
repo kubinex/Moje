@@ -1,7 +1,7 @@
 #include "DuplicateWordSearch.h"
 using namespace std;
 
-auto DuplicateWordSearch::operator=(const DuplicateWordSearch& _copy)->DuplicateWordSearch&
+auto DuplicateWordSearch::operator=(const DuplicateWordSearch& _copy)->DuplicateWordSearch& 
 {
 	if (&_copy != this)
 		number_of_all_words = _copy.number_of_all_words;

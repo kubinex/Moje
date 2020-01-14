@@ -43,6 +43,8 @@ private:
 
 	auto initialize_structure() -> void;
 
+	auto copy_structure(const DuplicateWordSearch* _copy) -> void;
+
 	DuplicateWordSearch* structure{};
 
 	DateTime time{};
